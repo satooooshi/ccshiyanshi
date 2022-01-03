@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pv-standard-test
+spec:
+  containers:
+  - image: alpine
+    name: alpine
+    command: ["tail", "-f", "/dev/null"]
+    volumeMounts:
+    - name: claim-volume
+      mountPath: /data
+  volumes:
+  - name: claim-volume
+    persistentVolumeClaim:
+      claimName: pv-standard-claim
+  terminationGracePeriodSeconds: 0

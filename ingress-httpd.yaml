@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: www.sjxt.com
+    http:
+      paths:
+      - path: /nginx
+        pathType: Prefix
+        backend:
+                service:
+                        name: nginx-svc
+                        port:
+                                number: 80
+      - path: /httpd
+        pathType: Prefix
+        backend:
+                service:
+                        name: httpd-svc
+                        port:
+                                number: 80
+      - path: /flask
+        pathType: Prefix
+        backend:
+                service:
+                        name: flask-svc
+                        port:
+                                number: 5000
